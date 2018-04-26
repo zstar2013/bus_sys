@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bootstrap 实例 - 基本的表格</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row" >
+        <div class="col-sm-3"
+            style="background-color: #dedef8;
+            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <div class="btn-group">
+    <button type="button" class="btn btn-default">按钮 1</button>
+    <button type="button" class="btn btn-default">按钮 2</button>
+    <button type="button" class="btn btn-default">按钮 3</button>
+</div>
+            <div class="dropdown">
+    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">主题
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="#">Java</a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="#">数据通信/网络</a>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+        </li>
+    </ul>
+</div>
+        </div>
+        <div class="col-sm-9">
+            <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>车牌号</th>
+                  <th>线路</th>
+                  <th>车队</th>
+                  <th>车型</th>
+                  <th>发动机号</th>
+                    <th>车架号</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {% if bi_list %}
+                  {% for bi in bi_list %}
+                <tr>
+                    <td>{{ bi.car_id }}</td>
+                    <td>{{bi.route}}</td>
+                    <td>{{bi.team}}</td>
+                    <td>{{bi.cartype}}</td>
+                    <td>{{bi.en_num}}</td>
+                    <td>{{bi.car_num}}</td>
+                    <td><a href="{% url 'bus_info:detail' bi.id %}">详细</a></td>
+                  {% endfor %}
+                    {% endif %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    <div class="row" >
+    <div class="col-sm-3"></div>
+{% if is_paginated %}
+<div class="col-sm-9"  style="background-color: #dedef8;
+            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+    <div class="pagination center-block">
+        <span class="col-sm-3">共{{ page_obj.paginator.num_pages }}页</span>
+        <span id="paging" class="col-sm-6">
+            {% if page_obj.has_previous %}
+            <span><a href="?page={{ page_obj.previous_page_number }}">上一页</a></span>
+            {% endif %}
+            <span class="active">{{ page_obj.number }}</span>
+            {% if page_obj.has_next %}
+            <span><a href="?page={{ page_obj.next_page_number }}">下一页</a></span>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
+</div>
+</div>
+
+</body>
+</html>

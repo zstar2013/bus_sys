@@ -1,0 +1,7 @@
+<h1>{{ businfo.car_id }}</h1>
+<form action="{% url 'bus_info:alter' businfo.id %}" method="post">
+    {% csrf_token %}
+    <br />
+    <input type="submit" value="alter" />
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</form>

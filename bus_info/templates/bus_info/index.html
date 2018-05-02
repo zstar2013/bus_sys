@@ -14,7 +14,7 @@
             style="background-color: #dedef8;
             box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
             <div class="btn-group">
-    <button type="button" class="btn btn-default">按钮 1</button>
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">按钮 1</button>
     <button type="button" class="btn btn-default">按钮 2</button>
     <button type="button" class="btn btn-default">按钮 3</button>
 </div>
@@ -92,7 +92,41 @@
 </div>
 {% endif %}
 </div>
+    <!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					模态框（Modal）标题
+				</h4>
+			</div>
+			<div class="modal-body">
+				在这里添加一些文本
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
 </div>
-
+<script>
+$(function() {
+        $(".btn").click(function(){
+            $(this).button('loading').delay(1000).queue(function() {
+            // $(this).button('reset');
+            // $(this).dequeue();
+            });
+        });
+    });
+</script>
 </body>
+
 </html>

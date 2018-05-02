@@ -1,7 +1,48 @@
-<h1>{{ businfo.car_id }}</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>详情</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h1>车牌号：{{ businfo.car_id }}</h1>
+    <br/>
 <form action="{% url 'bus_info:alter' businfo.id %}" method="post">
     {% csrf_token %}
-    <br />
+    <div class="row" >
+        <div class="col-sm-3">
+            车辆型号: <input type="text" name="car_type" value={{businfo.cartype}}>
+        </div>
+        <div class="col-sm-3">
+             车架号    : <input type="text" name="car_num" value={{businfo.car_num}}>
+        </div>
+        <div class="col-sm-3">
+            发动机号: <input type="text" name="en_num" value={{businfo.en_num}}>
+        </div>
+        <div class="col-sm-3">
+            燃料类型:<input type="text" name="car_fuel_type" value={{businfo.cartype.power_type}} disabled="true">
+        </div>
+    </div>
+    <br/>
+    <div class="row" >
+        <div class="col-sm-3">
+            车辆长度:<input type="text" name="car_length" value={{businfo.cartype.car_length}} disabled="true">
+        </div>
+        <div class="col-sm-3">
+            载客量    :<input type="text" name="bus_load" value={{businfo.cartype.bus_load}} disabled="true">
+        </div>
+        <div class="col-sm-3">
+            车辆类别:<input type="text" name="car_scale" value={{businfo.cartype.car_scale}} disabled="true">
+        </div>
+    </div>
+    <br/>
     <input type="submit" value="alter" />
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 </form>
+</div>
+</body>
+</html>

@@ -13,9 +13,8 @@ class IndexView(generic.ListView):
     template_name = 'bus_info/index.html'
     paginate_by = 10
     context_object_name = 'bi_list'
-    def get(self, request, *args, **kwargs):
-
-        pass
+    # def get(self, request, *args, **kwargs):
+    #     return HttpResponse(self.greeting)
 
 
     def get_queryset(self):

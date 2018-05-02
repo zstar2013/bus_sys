@@ -6,6 +6,7 @@ from django.views import generic
 from django.utils import timezone
 from bus_info.logic.feedback import feedback as fb
 from bus_info.models import MonthlyFeedback,BusInfo
+from bus_info.logic.oilsta_data import oilstationCompute as oc
 
 
 
@@ -13,9 +14,6 @@ class IndexView(generic.ListView):
     template_name = 'bus_info/index.html'
     paginate_by = 10
     context_object_name = 'bi_list'
-    # def get(self, request, *args, **kwargs):
-    #     return HttpResponse(self.greeting)
-
 
     def get_queryset(self):
         """Return the last five published questions.(not including those set to be
@@ -48,9 +46,16 @@ class ResultsView(generic.DetailView):
     model = BusInfo
     template_name = 'bus_info/results.html'
 
+def OptionResult(request):
+    return render(request, 'bus_info/option_result.html')
+
 
 def alter(request,bus_info_id):
     bus_info=get_object_or_404(BusInfo,pk=bus_info_id)
-    result=fb.scanfiles(["G:\\油耗\\一队油表.xls", "G:\\油耗\\三车队油表.xls", "G:\\油耗\\四队油表.xls", "G:\\油耗\\五队油表.xls"], "G:\\油耗\\营达车队.xls")
+    #result=fb.scanfiles(["G:\\油耗\\一队油表.xls", "G:\\油耗\\三车队油表.xls", "G:\\油耗\\四队油表.xls", "G:\\油耗\\五队油表.xls"], "G:\\油耗\\营达车队.xls")
 
     return HttpResponseRedirect(reverse('bus_info:results', args=(bus_info.id,)))
+
+def exportOilData(request):
+    oc.option1()
+    return HttpResponseRedirect(reverse('bus_info:option_result'))

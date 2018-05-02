@@ -21,5 +21,7 @@ urlpatterns=[
     path('index.html', views.IndexView.as_view(), name='index'),
     path('<int:pk>/',views.DetailView.as_view(),name='detail'),
     path('<int:pk>/results/',views.ResultsView.as_view(),name='results'),
-    path('<int:bus_info_id>/alter/',views.alter,name='alter')
+    path('<int:bus_info_id>/alter/',views.alter,name='alter'),
+    path('export/',views.exportOilData,name='export'),
+    path('option_result/',views.OptionResult,name='option_result')
 ]

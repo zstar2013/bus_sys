@@ -18,13 +18,13 @@
     <button type="button" class="btn btn-default">按钮 2</button>
     <button type="button" class="btn btn-default">按钮 3</button>
 </div>
-            <div class="dropdown">
-    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">主题
+<div class="dropdown">
+    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">测试
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="#">Java</a>
+            <a role="menuitem" tabindex="-1" href="export">导出加油站数据到文档</a>
         </li>
         <li role="presentation">
             <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
@@ -71,12 +71,13 @@
             </table>
           </div>
         </div>
-    </div>
+    </div><!-- end row_1 -->
     <div class="row" >
-    <div class="col-sm-3"></div>
-{% if is_paginated %}
-<div class="col-sm-9"  style="background-color: #dedef8;
-            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+    <div class="col-sm-3">
+
+    </div>
+    <div class="col-sm-9">
+        {% if is_paginated %}
     <div class="pagination center-block">
         <span class="col-sm-3">共{{ page_obj.paginator.num_pages }}页</span>
         <span id="paging" class="col-sm-6">
@@ -89,8 +90,10 @@
             {% endif %}
         </span>
     </div>
+        {% endif %}
 </div>
-{% endif %}
+
+    </div>
 </div>
     <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -117,16 +120,5 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-<script>
-$(function() {
-        $(".btn").click(function(){
-            $(this).button('loading').delay(1000).queue(function() {
-            // $(this).button('reset');
-            // $(this).dequeue();
-            });
-        });
-    });
-</script>
 </body>
-
 </html>

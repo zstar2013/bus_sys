@@ -15,10 +15,27 @@ class IndexView(generic.ListView):
     paginate_by = 10
     context_object_name = 'bi_list'
 
+    # def get(self, request):
+    #     print("-----------------------------", "get!")
+    #     print(request)
+    #     set=BusInfo.objects.filter(route="k2")
+    #     return render(request, "bus_info/index.html", {
+    #         "bi_list": set
+    #     })
+    def get_context_data(self, **kwargs):
+        print("-----------------------------","get_context_data")
+
+        context = super().get_context_data(**kwargs)
+        print(context)
+        context['now'] = timezone.now()
+        context['list']=[10,20,50,100,1000]
+        return context
+
     def get_queryset(self):
+        print("-----------------------------","get_queryset!")
         """Return the last five published questions.(not including those set to be
         published in the future)"""
-        set=BusInfo.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        set=BusInfo.objects.filter(published_date__lte=timezone.now()) #.order_by('-published_date')
         return set
     def reset_paginate_by(self,num):
         self.paginate_by=num

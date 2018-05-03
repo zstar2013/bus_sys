@@ -59,3 +59,8 @@ def alter(request,bus_info_id):
 def exportOilData(request):
     oc.option1()
     return HttpResponseRedirect(reverse('bus_info:option_result'))
+
+#重置表格每页数据量
+def resetTableSize(request,size):
+    IndexView.paginate_by=size
+    return HttpResponseRedirect(reverse('bus_info:index'))

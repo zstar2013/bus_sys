@@ -14,10 +14,10 @@
             style="background-color: #dedef8;
             box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
 <div class="dropdown">
-    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">设置每页数据量
+    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">筛选车型
         <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation">
             <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' 10 %}">设置为每页10个数据</a>
         </li>
@@ -32,7 +32,21 @@
             <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' 100 %}">设置为每页100个数据</a>
         </li>
     </ul>
-</div>
+</div><!-- end of dropdown -->
+            <div class="dropdown">
+    <button type="button" class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown">设置每页数据量
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        {% if list %}
+                  {% for index in list %}
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' index %}">设置为每页{{ index }}个数据</a>
+        </li>
+        {% endfor %}
+                    {% endif %}
+    </ul>
+</div><!-- end of dropdown -->
         </div>
         <div class="col-sm-9">
             <div class="table-responsive">

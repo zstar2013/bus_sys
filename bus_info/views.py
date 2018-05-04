@@ -29,6 +29,8 @@ class IndexView(generic.ListView):
         print(context)
         context['now'] = timezone.now()
         context['list']=[10,20,50,100,1000]
+        context['route']=BusInfo.objects.raw('SELECT DISTINCT 1 as id,route FROM bus_info_businfo')
+        print("--------------------------------------------route",context['route'])
         return context
 
     def get_queryset(self):
@@ -62,6 +64,14 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = BusInfo
     template_name = 'bus_info/results.html'
+
+    def get_context_data(self, **kwargs):
+        print("-----------------------------", "get_context_data")
+
+        context = super().get_context_data(**kwargs)
+        print(context)
+        context['now'] = timezone.now()
+        return context
 
 def OptionResult(request):
     return render(request, 'bus_info/option_result.html')

@@ -18,19 +18,13 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        {% if route %}
+                  {% for index in route %}
         <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' 10 %}">设置为每页10个数据</a>
+            <a role="menuitem" tabindex="-1" href="">{{index.route}}路</a>
         </li>
-        <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' 30 %}">设置为每页30个数据</a>
-        </li>
-        <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' 50 %}">设置为每页50个数据</a>
-        </li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="{% url 'bus_info:reset_table_size' 100 %}">设置为每页100个数据</a>
-        </li>
+        {% endfor %}
+                    {% endif %}
     </ul>
 </div><!-- end of dropdown -->
             <div class="dropdown">
@@ -93,7 +87,9 @@
             {% if page_obj.has_previous %}
             <span><a href="?page={{ page_obj.previous_page_number }}">上一页</a></span>
             {% endif %}
+            <span>{{ page_obj.number }}</span>
             <span class="active">{{ page_obj.number }}</span>
+            <span>{{ page_obj.number }}</span>
             {% if page_obj.has_next %}
             <span><a href="?page={{ page_obj.next_page_number }}">下一页</a></span>
             {% endif %}

@@ -127,6 +127,9 @@ class MonthlyFeedback(models.Model):
     #车队上报百公里指标
     team_target=models.FloatField(max_length=15,default=0)
 
+    def __str__(self):
+        return self.carInfo.car_id
+
 class RouteMaintainCount(models.Model):
     #线路名称
     route=models.CharField(max_length=10,default='')

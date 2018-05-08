@@ -79,7 +79,7 @@ def OptionResult(request):
 
 def alter(request,bus_info_id):
     bus_info=get_object_or_404(BusInfo,pk=bus_info_id)
-    #result=fb.scanfiles(["G:\\油耗\\一队油表.xls", "G:\\油耗\\三车队油表.xls", "G:\\油耗\\四队油表.xls", "G:\\油耗\\五队油表.xls"], "G:\\油耗\\营达车队.xls")
+    result=fb.scanfiles(["G:\\油耗\\一队油表.xls", "G:\\油耗\\三车队油表.xls", "G:\\油耗\\四队油表.xls", "G:\\油耗\\五队油表.xls"], "G:\\油耗\\营达车队.xls")
 
     return HttpResponseRedirect(reverse('bus_info:results', args=(bus_info.id,)))
 

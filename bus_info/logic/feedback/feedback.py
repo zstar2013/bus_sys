@@ -17,6 +17,7 @@ xOffset=3
 
 #获取明细数据
 def load_detail_data(table, item,mlist,time):
+
     nrows = table.nrows
     indexR = item[0]
     carNoC = item[1]
@@ -34,7 +35,7 @@ def load_detail_data(table, item,mlist,time):
             bi = BusInfo.objects.get(car_id=car_id)
         except BusInfo.DoesNotExist:
             bi = None
-            pass
+
         if bi is not None:
             for mf in mlist:
                 if mf.carInfo==bi and mf.route==route:
@@ -46,7 +47,7 @@ def load_detail_data(table, item,mlist,time):
                         mf.engage_mileage=getFloatValue(table.cell(i, carNoC + 8).value)   # 包车公里
                         mf.public_mileage=getFloatValue(table.cell(i, carNoC + 9).value)   # 公用公里
                         mf.fault_times=getFloatValue(table.cell(i, carNoC + 14).value)     # 故障次数
-                        mf.fautl_minutes=getFloatValue(table.cell(i, carNoC + 15).value)   # 故障分钟
+                        mf.fault_minutes=getFloatValue(table.cell(i, carNoC + 15).value)   # 故障分钟
                         mf.save()
                         mlist.remove(mf)
                     except:
@@ -54,6 +55,7 @@ def load_detail_data(table, item,mlist,time):
                         print("--------------------------",mf.carInfo)
 
                     break
+    #print("---------------------------------------mlist", mlist)
 
         # item.append(table.cell(i, carNoC + 1).value)    #营运天数
         # item.append(table.cell(i, carNoC + 2).value)    #修理天数
@@ -282,9 +284,10 @@ def getlastrowindex():
 # 扫描文件
 def scanfiles(filelist=mFilename, time="18年3月"):
     result=([],[])
-    mlist=[]
+
     #依次查询文件列表
     for i in range(0, len(filelist)):
+        mlist = []
         #打开文件
         data = xlrd.open_workbook(filelist[i])
         #遍历sheet
@@ -296,6 +299,8 @@ def scanfiles(filelist=mFilename, time="18年3月"):
                     continue
                 else:
                     mlist.extend(load_sum_data(table, loacl_of_startItem))
+
+        #print("----------------------------------mlist", mlist)
         #再次遍历sheet
         for sheet in data.sheets():
              if st.contains(sheet.name, "汇总"):
@@ -304,7 +309,9 @@ def scanfiles(filelist=mFilename, time="18年3月"):
                 if loacl_of_startItem is None:
                     continue
                 else:
+                    print("----------------------------------",loacl_of_startItem)
                     load_detail_data(table, loacl_of_startItem,mlist,time)
+        mlist=None
     return result
 
 def checkRouteExist(result,name):

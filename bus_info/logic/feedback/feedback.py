@@ -28,10 +28,11 @@ def load_detail_data(table, item,mlist,time):
             continue
         if table.cell(i, carNoC).value is "0":
             continue
-        if st.contain_zh(str(table.cell(i, carNoC).value)):
-            continue
+        # if st.contain_zh(str(table.cell(i, carNoC).value)):
+        #     continue
         try:
             car_id=getCar_id(table.cell(i, carNoC).value,table.name)
+            print("-----------------------------------car_id",car_id)
             bi = BusInfo.objects.get(car_id=car_id)
         except BusInfo.DoesNotExist:
             bi = None
@@ -258,10 +259,11 @@ def getRoute(tablename):
 # 对车辆id进行处理
 def getCar_id(id, tablename):
     s = str(id)
-    if (st.contains(str(id), "路")):
-        s = str(id).split("路")[1].strip()
-    if (st.contains(str(id), "线")):
-        s = str(id).split("线")[1].strip()
+    if (st.contains(s, "路")):
+        print(s)
+        s = s.split("路")[1].strip()
+    if (st.contains(s, "线")):
+        s = s.split("线")[1].strip()
     if st.contains(s, ".") or len(s) == 3:
         s = s.split(".")[0]
         if len(s)==4:
@@ -309,7 +311,7 @@ def scanfiles(filelist=mFilename, time="18年3月"):
                 if loacl_of_startItem is None:
                     continue
                 else:
-                    print("----------------------------------",loacl_of_startItem)
+                    #print("----------------------------------",loacl_of_startItem)
                     load_detail_data(table, loacl_of_startItem,mlist,time)
         mlist=None
     return result
